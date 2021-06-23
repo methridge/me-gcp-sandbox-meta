@@ -2,16 +2,15 @@
 ### Region Bastion Host
 ###
 resource "google_compute_instance" "instance" {
-  name         = "${var.region}-instance"
+  name         = "${var.region}-instance-${var.environment}"
   machine_type = var.machine_type
   project      = var.project
   zone         = data.google_compute_zones.zones.names[0]
   metadata_startup_script = templatefile(
     "${path.module}/templates/startup.sh",
-    { app_ver = var.app_ver,
-    }
+    { app_ver = var.app_ver, }
   )
-  tags = concat(["http-server", "https-server"], var.custom_tags)
+  tags = concat(["http-server", "https-server"], [var.environment], var.custom_tags)
   boot_disk {
     initialize_params {
       image = data.google_compute_image.ubuntu.self_link
