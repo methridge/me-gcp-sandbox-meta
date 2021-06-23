@@ -8,6 +8,11 @@ variable "app_ver" {
   default     = "0.1.3"
 }
 
+variable "environment" {
+  type        = string
+  description = "Application deployment environment"
+}
+
 variable "project" {
   type        = string
   description = "GCP Project name"
