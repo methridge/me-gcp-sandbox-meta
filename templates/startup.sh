@@ -9,7 +9,7 @@ tar -zxf /tmp/gcp-meta.tgz --directory /usr/local/bin
 chown root:root /usr/local/bin/gcp-meta
 chmod 755 /usr/local/bin/gcp-meta
 
-cat > "/tmp/meta.service" <<EOF
+cat > "/tmp/gcp-meta.service" <<EOF
 [Unit]
 Description="GCP Metadata App"
 Requires=network-online.target
@@ -24,8 +24,8 @@ Restart=on-failure
 WantedBy=multi-user.target
 EOF
 
-mv /tmp/meta.service /usr/lib/systemd/system/meta.service
-chown root:root /usr/lib/systemd/system/meta.service
-chmod 644 /usr/lib/systemd/system/meta.service
+mv /tmp/gcp-meta.service /usr/lib/systemd/system/gcp-meta.service
+chown root:root /usr/lib/systemd/system/gcp-meta.service
+chmod 644 /usr/lib/systemd/system/gcp-meta.service
 systemctl daemon-reload
-systemctl start meta
+systemctl start gcp-meta
