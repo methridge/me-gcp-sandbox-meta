@@ -1,0 +1,19 @@
+### Terraform ###
+# Local .terraform directories
+**/.terraform/*
+
+# Local Terraform Version Lock files
+.terraform.lock.hcl
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# .tfvars files
+*.tfvars
+
+# Temp Directories
+**/.tmp
+
+# Packer auto var files
+*.auto.pkrvars.hcl
