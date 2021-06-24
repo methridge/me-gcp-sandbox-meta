@@ -12,7 +12,7 @@ resource "google_compute_instance" "instance" {
   )
   tags = concat(
     ["http-server", "https-server", "demo-2021-06-23"],
-    [var.environment],
+    ["meta-app-${var.environment}", var.environment],
     var.custom_tags,
   )
   boot_disk {
@@ -32,13 +32,11 @@ resource "google_compute_instance" "instance" {
   }
 }
 
-# module "region-dns" {
-#   source     = "../region-dns"
-#   project    = var.project
-#   region     = var.region
-#   dnszone    = var.dnszone
-#   zone-name  = var.zone_link
-#   bastion-ip = google_compute_instance.region_bastion.network_interface.0.access_config.0.nat_ip
-#   lb-ip      = google_compute_address.region-pub-ip.address
-#   glb-ip     = module.global-https-lb.region-lb-global-ip
+# resource "google_dns_record_set" "app-dns" {
+#   project      = var.project
+#   name         = "meta-${var.environment}.${var.region}.${var.zone_name}"
+#   type         = "A"
+#   ttl          = 60
+#   managed_zone = var.zone_link
+#   rrdatas      = [google_compute_instance.instance.network_interface.0.access_config.0.nat_ip]
 # }

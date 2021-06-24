@@ -23,7 +23,7 @@ variable "region" {
   description = "GCP Region for Hashistack deployment"
 }
 
-variable "dnszone" {
+variable "zone_name" {
   type        = string
   description = "DNS Zone name for LB"
   default     = ""
